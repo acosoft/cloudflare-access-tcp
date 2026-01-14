@@ -1,0 +1,33 @@
+name: 'cloudflare-access-tcp'
+description: 'GitHub Action for establishing a Cloudflare Access TCP tunnel using cloudflared (Linux amd64 only)'
+author: 'acosoft'
+runs:
+  using: 'composite'
+  steps:
+    - name: Download cloudflared (2025.11.1 linux-amd64)
+      shell: bash
+      run: |
+        curl -L -o cloudflared https://github.com/cloudflare/cloudflared/releases/download/2025.11.1/cloudflared-linux-amd64
+        chmod +x cloudflared
+    - name: Start Cloudflare Access TCP tunnel
+      shell: bash
+      run: |
+        ./cloudflared access tcp \
+          --hostname ${{ inputs.hostname }} \
+          --url ${{ inputs.url }} \
+          --id ${{ inputs.id }} \
+          --secret ${{ inputs.secret }} &
+        sleep 5
+inputs:
+  hostname:
+    description: 'Cloudflare Access application hostname (e.g. api.example.com)'
+    required: true
+  url:
+    description: 'Local TCP URL to forward to (e.g. tcp://127.0.0.1:6443)'
+    required: true
+  id:
+    description: 'Cloudflare Access service token client ID'
+    required: true
+  secret:
+    description: 'Cloudflare Access service token secret'
+    required: true

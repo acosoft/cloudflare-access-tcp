@@ -1,0 +1,31 @@
+name: Test Cloudflare Access TCP Tunnel
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-tunnel:
+    runs-on: ubuntu-latest
+    environment: hetzner
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start Cloudflare Access TCP tunnel
+        uses: ./
+        with:
+          hostname: ${{ vars.CF_TUNNEL_HOST }}     
+          url: tcp://127.0.0.1:6443
+          id: ${{ secrets.CF_ACCESS_CLIENT_ID }}
+          secret: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+
+      - name: Configure kubeconfig for local API
+        run: |
+          echo "${{ secrets.KUBECONFIG_CONTENT }}" > kubeconfig
+          echo "KUBECONFIG=$PWD/kubeconfig" >> $GITHUB_ENV
+
+      - name: Check for coredns pod in kube-system
+        run: |
+          kubectl get pods -n kube-system | grep coredns
