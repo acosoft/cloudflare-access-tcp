@@ -1,5 +1,5 @@
 name: 'cloudflare-access-tcp'
-description: 'GitHub Action for establishing a Cloudflare Access TCP tunnel using cloudflared (Linux amd64 only)'
+description: 'GitHub Action for establishing a Cloudflare Access TCP tunnel using cloudflared'
 author: 'acosoft'
 runs:
   using: 'composite'
@@ -31,3 +31,7 @@ inputs:
   secret:
     description: 'Cloudflare Access service token secret'
     required: true
+
+branding:
+  icon: 'lock'
+  color: 'orange'
