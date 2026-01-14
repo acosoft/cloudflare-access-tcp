@@ -37,7 +37,7 @@ This version of the action uses cloudflared version 2025.11.1 for Linux amd64.
 
 Versions follow the format:
 
-  <cloudflared-version>-<architecture>
+  \<cloudflared-version>-\<architecture>
 
 For example:
 
