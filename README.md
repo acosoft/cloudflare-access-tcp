@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Start Cloudflare Access TCP tunnel
-        uses: acosoft/cloudflare-access-tcp@v2025.11.1-linux-amd64
+        uses: acosoft/cloudflare-access-tcp@2025.11.1-linux-amd64
         with:
           hostname: ${{ secrets.CF_TUNNEL_HOST }}
           url: tcp://127.0.0.1:6443
@@ -37,11 +37,11 @@ This version of the action uses cloudflared version 2025.11.1 for Linux amd64.
 
 Versions follow the format:
 
-    v<cloudflared-version>-<architecture>
+  <cloudflared-version>-<architecture>
 
 For example:
 
-    acosoft/cloudflare-access-tcp@v2025.11.1-linux-amd64
+  acosoft/cloudflare-access-tcp@2025.11.1-linux-amd64
 
 This means the action uses cloudflared version 2025.11.1 for Linux amd64.
 
